@@ -14,7 +14,7 @@ import {
   PositionProps
 } from 'styled-system'
 
-type ButtonVariants = {
+export type ButtonVariants = {
   primary: 'primary'
   secondary: 'secondary'
 }
@@ -23,6 +23,8 @@ export interface ButtonProps extends SpaceProps, LayoutProps, ColorProps, Border
   variant: keyof ButtonVariants
   isLoading?: boolean
   disabled?: boolean
+  type?: string
+  onClick?(): void
 }
 
 const ButtonComponent: React.FC<ButtonProps> = ({ isLoading, disabled, children, ...props }) => {
@@ -36,7 +38,7 @@ const ButtonComponent: React.FC<ButtonProps> = ({ isLoading, disabled, children,
   )
 }
 
-const Button: React.FC<ButtonProps> = styled.button`
+const Button: React.FC<Omit<ButtonProps, 'onClick'>> = styled.button`
   ${variant({
     variants: {
       primary: {

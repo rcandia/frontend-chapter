@@ -12,9 +12,10 @@ interface InputProps {
   type?: string
 }
 
-interface InputComponentProps extends InputProps, ColumnProps {
-  register(): void
+export interface InputComponentProps extends InputProps, ColumnProps {
+  register?(): void
   label?: string
+  inputTestId?: string
 }
 
 const InputComponent: React.FC<InputComponentProps> = ({
@@ -24,12 +25,13 @@ const InputComponent: React.FC<InputComponentProps> = ({
   placeholder,
   error,
   type,
+  inputTestId,
   ...props
 }) => {
   return (
     <Column height={82} {...props}>
       {label && <Text variant='regular'>{label}</Text>}
-      <Input name={name} ref={register} placeholder={placeholder} error={error} type={type} />
+      <Input name={name} ref={register} placeholder={placeholder} error={error} type={type} data-testid={inputTestId} />
       {error?.message && (
         <Text variant='tiny' color='red'>
           {error?.message}
